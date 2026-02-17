@@ -1,4 +1,5 @@
 import "./style.css";
+import { addTask, displayTasks } from "./task.js";
 
 function createPage() {
     const body = document.querySelector("body");
@@ -24,14 +25,26 @@ function createPage() {
     newProjectBtn.id = "projectbtn";
     sidePanel.appendChild(newProjectBtn);
 
-    newProjectBtn.addEventListener("click", () => {
-
-    });
-
-
     const todoList = document.createElement("div");
     todoList.id = "todo";
     body.appendChild(todoList);
+
+    const dialogBox = document.querySelector("#dialog");
+
+    newProjectBtn.addEventListener("click", () => {
+        dialogBox.showModal();
+    });
+
+    const confirmBtn = document.querySelector("#confirmBtn");
+    confirmBtn.addEventListener("click", (event) => {
+
+        addTask(title.value, description.value, duedate.value, priority.value);
+        event.preventDefault();
+        displayTasks();
+        dialogBox.close();
+    });
+
+
 
 }
 
