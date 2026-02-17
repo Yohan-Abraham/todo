@@ -30,11 +30,28 @@ function createPage() {
     newProjectBtn.id = "projectbtn";
     sidePanel.appendChild(newProjectBtn);
 
+    const projectModla = document.querySelector("#newproject");
+    const projectConfirmBtn = document.querySelector("#projectConfirmBtn");
+    const newProjectName = document.querySelector("#projectname");
+
+    newProjectBtn.addEventListener("click", () => {
+        projectModla.showModal();
+    });
+
+    projectConfirmBtn.addEventListener("click", (event) => {
+
+        event.preventDefault();
+
+        projectModla.close();
+    });
+
+
+
     const todoList = document.createElement("div");
     todoList.id = "todo";
     body.appendChild(todoList);
 
-    const dialogBox = document.querySelector("#dialog");
+    const dialogBox = document.querySelector("#task");
     const confirmBtn = document.querySelector("#confirmBtn");
     const title = document.querySelector("#title");
     const description = document.querySelector("#description");
