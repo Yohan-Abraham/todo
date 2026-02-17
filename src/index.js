@@ -1,15 +1,20 @@
 import "./style.css";
-import { addTask, displayTasks } from "./task.js";
+import { addTask, displayTasks } from "./list.js";
 
 function createPage() {
     const body = document.querySelector("body");
 
     const navBar = document.createElement("nav");
     navBar.id = "nav";
-    const title = document.createElement("h1");
-    title.textContent = "All Tasks";
-    navBar.appendChild(title);
+    const projectTitle = document.createElement("h1");
+    projectTitle.textContent = "All Tasks";
+    navBar.appendChild(projectTitle);
     body.appendChild(navBar);
+
+    const newTaskBtn = document.createElement("button");
+    newTaskBtn.textContent = "New Task";
+    newTaskBtn.id = "newtaskbtn";
+    navBar.appendChild(newTaskBtn);
 
 
     const sidePanel = document.createElement("div");
@@ -30,12 +35,16 @@ function createPage() {
     body.appendChild(todoList);
 
     const dialogBox = document.querySelector("#dialog");
+    const confirmBtn = document.querySelector("#confirmBtn");
+    const title = document.querySelector("#title");
+    const description = document.querySelector("#description");
+    const duedate = document.querySelector("#duedate");
+    const priority = document.querySelector("#priority");
 
-    newProjectBtn.addEventListener("click", () => {
+    newTaskBtn.addEventListener("click", () => {
         dialogBox.showModal();
     });
 
-    const confirmBtn = document.querySelector("#confirmBtn");
     confirmBtn.addEventListener("click", (event) => {
 
         addTask(title.value, description.value, duedate.value, priority.value);
