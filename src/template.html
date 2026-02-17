@@ -34,8 +34,9 @@
             <div class="priority">Priority: High</div>
         </div>
     </div> -->
-    <dialog id="dialog">
+    <dialog id="task">
         <form>
+            <h2>New Task</h2>
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" placeholder="title">
 
@@ -49,6 +50,16 @@
             <input type="text" id="priority" name="priority" placeholder="priority">
 
             <button id="confirmBtn">Confirm</button>
+        </form>
+    </dialog>
+
+    <dialog id="newproject">
+        <form>
+            <h2>New Project</h2>
+            <label for="projectname">Project Name:</label>
+            <input type="text" id="projectname" name="projectname" required>
+
+            <button id="projectConfirmBtn">Confirm</button>
         </form>
     </dialog>
 </body>
