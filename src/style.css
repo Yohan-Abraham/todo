@@ -109,7 +109,8 @@ nav {
     grid-row: 2;
 }
 
-#dialog {
+#task,
+#newproject {
     background-color: black;
     top: 30%;
     left: 45%;
@@ -133,7 +134,8 @@ form input {
     color: black;
 }
 
-#confirmBtn {
+#confirmBtn,
+#projectConfirmBtn {
     background-color: black;
     border: 1px solid white;
     border-radius: 10px;
