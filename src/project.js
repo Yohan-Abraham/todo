@@ -32,7 +32,22 @@ class Project {
                 task.style.borderLeftColor = "green";
                 task.style.borderLeftWidth = "5px";
             }
-            task.textContent = this.arr.tasks[i].title;
+
+            const taskTitle = document.createElement("div");
+            taskTitle.className = "title";
+            taskTitle.textContent = this.arr.tasks[i].title;
+            task.appendChild(taskTitle);
+
+            const taskDescription = document.createElement("div");
+            taskDescription.className = "description";
+            taskDescription.textContent = this.arr.tasks[i].description;
+            task.appendChild(taskDescription);
+
+            const taskDueDate = document.createElement("div");
+            taskDueDate.className = "duedate";
+            taskDueDate.textContent = this.arr.tasks[i].dueDate;
+            task.appendChild(taskDueDate);
+
             todoList.appendChild(task);
 
 
