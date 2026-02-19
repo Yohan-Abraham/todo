@@ -8,7 +8,7 @@ body {
     background-color: black;
     display: grid;
     grid-template-columns: 1fr 5fr;
-    grid-template-rows: 1fr 4fr;
+    grid-template-rows: 1fr 6fr;
     height: 100vh;
 }
 
@@ -17,17 +17,19 @@ nav {
     grid-row: 1;
     font-size: 1.5rem;
     border-bottom: 1px solid white;
-    padding-top: 2.2em;
-    padding-bottom: 2.2em;
-    padding-left: 3.5em;
+    display: grid;
+    grid-template-columns: 6fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    padding: 2em;
+    justify-items: center;
 }
 
 #newtaskbtn {
+    grid-column: 3;
     background-color: black;
     border: 1px solid white;
     border-radius: 10px;
-    padding: 1em;
-    margin-top: 1.2em;
+    padding: 0.5em;
 }
 
 #side-panel {
@@ -45,12 +47,12 @@ nav {
 }
 
 #projectbtn {
+    grid-column: 2;
     background-color: black;
     border-radius: 10px;
     border: 1px solid white;
-    padding: 1em;
+    padding: 0.5em;
     display: block;
-    margin-top: 1.2em;
 }
 
 #projects {
