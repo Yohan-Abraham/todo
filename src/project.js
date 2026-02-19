@@ -20,8 +20,22 @@ class Project {
             const task = document.createElement("div");
             task.className = "items";
             task.dataset.id = i;
+            if ((this.arr.tasks[i].priority).toLowerCase() === "high") {
+                task.style.borderLeftColor = "red";
+                task.style.borderLeftWidth = "5px";
+            }
+            else if ((this.arr.tasks[i].priority).toLowerCase() === "medium") {
+                task.style.borderLeftColor = "yellow";
+                task.style.borderLeftWidth = "5px";
+            }
+            else if ((this.arr.tasks[i].priority).toLowerCase() === "low") {
+                task.style.borderLeftColor = "green";
+                task.style.borderLeftWidth = "5px";
+            }
             task.textContent = this.arr.tasks[i].title;
             todoList.appendChild(task);
+
+
         }
     }
 }
