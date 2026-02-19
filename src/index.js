@@ -13,6 +13,11 @@ function createPage() {
     const newTaskBtn = document.createElement("button");
     newTaskBtn.textContent = "New Task";
     newTaskBtn.id = "newtaskbtn";
+    const newProjectBtn = document.createElement("button");
+    newProjectBtn.textContent = "New Project";
+    newProjectBtn.id = "projectbtn";
+
+    navBar.appendChild(newProjectBtn);
     navBar.appendChild(newTaskBtn);
 
 
@@ -23,11 +28,7 @@ function createPage() {
     sidePanel.appendChild(sidePanelTitle);
     const projects = document.createElement("div");
     projects.id = "projects";
-    const newProjectBtn = document.createElement("button");
-    newProjectBtn.textContent = "New Project";
-    newProjectBtn.id = "projectbtn";
 
-    sidePanel.appendChild(newProjectBtn);
     sidePanel.appendChild(projects);
     body.appendChild(sidePanel);
 
@@ -65,8 +66,6 @@ function createPage() {
         dialogBox.showModal();
     });
 
-
-    const itemContainer = document.querySelector(".items");
 
     confirmBtn.addEventListener("click", (event) => {
         if (myProjects.length === 0) {
