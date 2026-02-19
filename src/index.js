@@ -65,7 +65,15 @@ function createPage() {
         dialogBox.showModal();
     });
 
+
+    const itemContainer = document.querySelector(".items");
+
     confirmBtn.addEventListener("click", (event) => {
+        if (myProjects.length === 0) {
+            alert("Please create a project first!");
+            dialogBox.close();
+            return;
+        }
         myProjects[currentID].addTask(title.value, description.value, duedate.value, priority.value);
         event.preventDefault();
         myProjects[currentID].displayTasks();
