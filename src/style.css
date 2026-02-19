@@ -49,10 +49,12 @@ nav {
     border-radius: 10px;
     border: 1px solid white;
     padding: 1em;
+    display: block;
+    margin-top: 1.2em;
 }
 
 #projects {
-    margin-top: 2.5em;
+    margin: 1em 0;
     font-size: 1.5rem;
 }
 
@@ -140,4 +142,19 @@ form input {
     border: 1px solid white;
     border-radius: 10px;
     padding: 0.5em;
+}
+
+.project {
+    width: 100%;
+    background-color: black;
+    border: 1px solid white;
+    padding: 1em;
+    border-radius: 10px;
+    margin: 1em 0;
+}
+
+.project:hover,
+#projectbtn:hover,
+#newtaskbtn:hover {
+    background-color: blueviolet;
 }
