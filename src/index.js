@@ -1,5 +1,5 @@
 import "./style.css";
-import { addTask, displayTasks } from "./list.js";
+import { addProject, displayProjects, myProjects } from "./project.js";
 
 function createPage() {
     const body = document.querySelector("body");
@@ -7,7 +7,6 @@ function createPage() {
     const navBar = document.createElement("nav");
     navBar.id = "nav";
     const projectTitle = document.createElement("h1");
-    projectTitle.textContent = "All Tasks";
     navBar.appendChild(projectTitle);
     body.appendChild(navBar);
 
@@ -19,33 +18,34 @@ function createPage() {
 
     const sidePanel = document.createElement("div");
     sidePanel.id = "side-panel";
+    const sidePanelTitle = document.createElement("h2");
+    sidePanelTitle.textContent = "Projects";
+    sidePanel.appendChild(sidePanelTitle);
     const projects = document.createElement("div");
-    projects.textContent = "Projects";
     projects.id = "projects";
-    sidePanel.appendChild(projects);
-    body.appendChild(sidePanel);
-
     const newProjectBtn = document.createElement("button");
     newProjectBtn.textContent = "New Project";
     newProjectBtn.id = "projectbtn";
+
     sidePanel.appendChild(newProjectBtn);
+    sidePanel.appendChild(projects);
+    body.appendChild(sidePanel);
 
     const projectModla = document.querySelector("#newproject");
     const projectConfirmBtn = document.querySelector("#projectConfirmBtn");
     const newProjectName = document.querySelector("#projectname");
+
 
     newProjectBtn.addEventListener("click", () => {
         projectModla.showModal();
     });
 
     projectConfirmBtn.addEventListener("click", (event) => {
-
+        addProject(newProjectName.value);
         event.preventDefault();
-
+        displayProjects();
         projectModla.close();
     });
-
-
 
     const todoList = document.createElement("div");
     todoList.id = "todo";
@@ -58,19 +58,27 @@ function createPage() {
     const duedate = document.querySelector("#duedate");
     const priority = document.querySelector("#priority");
 
+    const projectsContainer = document.querySelector("#projects");
+    let currentID = 0;
+
     newTaskBtn.addEventListener("click", () => {
         dialogBox.showModal();
     });
 
     confirmBtn.addEventListener("click", (event) => {
-
-        addTask(title.value, description.value, duedate.value, priority.value);
+        myProjects[currentID].addTask(title.value, description.value, duedate.value, priority.value);
         event.preventDefault();
-        displayTasks();
+        myProjects[currentID].displayTasks();
         dialogBox.close();
     });
 
 
+
+    projectsContainer.addEventListener("click", (e) => {
+        currentID = e.target.dataset.id;
+        projectTitle.textContent = myProjects[e.target.dataset.id].name;
+        myProjects[e.target.dataset.id].displayTasks();
+    });
 
 }
 
