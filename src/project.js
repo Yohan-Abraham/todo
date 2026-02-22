@@ -33,6 +33,16 @@ class Project {
                 task.style.borderLeftWidth = "5px";
             }
 
+            const completeBtn = document.createElement("button");
+            completeBtn.className = "complete";
+
+            completeBtn.addEventListener("click", () => {
+                this.arr.tasks.splice(i, 1);
+                this.displayTasks();
+            });
+
+            task.appendChild(completeBtn);
+
             const taskTitle = document.createElement("div");
             taskTitle.className = "title";
             taskTitle.textContent = this.arr.tasks[i].title;
