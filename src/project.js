@@ -1,6 +1,7 @@
 import { Task, TaskList } from "./list.js";
 
 const myProjects = [];
+const completedTasks = [];
 
 class Project {
     constructor(name) {
@@ -37,6 +38,7 @@ class Project {
             completeBtn.className = "complete";
 
             completeBtn.addEventListener("click", () => {
+                completedTasks.push(this.arr.tasks[i]);
                 this.arr.tasks.splice(i, 1);
                 this.displayTasks();
             });
@@ -45,17 +47,17 @@ class Project {
 
             const taskTitle = document.createElement("div");
             taskTitle.className = "title";
-            taskTitle.textContent = this.arr.tasks[i].title;
+            taskTitle.textContent = `Title: ${this.arr.tasks[i].title}`;
             task.appendChild(taskTitle);
 
             const taskDescription = document.createElement("div");
             taskDescription.className = "description";
-            taskDescription.textContent = this.arr.tasks[i].description;
+            taskDescription.textContent = `Description: ${this.arr.tasks[i].description}`;
             task.appendChild(taskDescription);
 
             const taskDueDate = document.createElement("div");
             taskDueDate.className = "duedate";
-            taskDueDate.textContent = this.arr.tasks[i].dueDate;
+            taskDueDate.textContent = `Due Date: ${this.arr.tasks[i].dueDate}`;
             task.appendChild(taskDueDate);
 
             todoList.appendChild(task);
@@ -83,4 +85,4 @@ function displayProjects() {
     }
 }
 
-export { addProject, displayProjects, myProjects };
+export { addProject, displayProjects, myProjects, completedTasks };
