@@ -46,6 +46,13 @@ nav {
     margin-bottom: 1em;
 }
 
+#completedbtn {
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 0.5em;
+}
+
 #projectbtn {
     grid-column: 2;
     background-color: black;
@@ -101,7 +108,8 @@ nav {
     padding: 1em;
 }
 
-.complete:hover {
+.complete:hover,
+#completedbtn:hover {
     background-color: blueviolet;
 }
 
