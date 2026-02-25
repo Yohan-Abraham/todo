@@ -1,5 +1,5 @@
 import "./style.css";
-import { addProject, displayProjects, myProjects } from "./project.js";
+import { addProject, displayProjects, myProjects, completedTasks } from "./project.js";
 
 function createPage() {
     const body = document.querySelector("body");
@@ -26,6 +26,40 @@ function createPage() {
     const sidePanelTitle = document.createElement("h2");
     sidePanelTitle.textContent = "Projects";
     sidePanel.appendChild(sidePanelTitle);
+
+    const completedBtn = document.createElement("button");
+    completedBtn.textContent = "Completed";
+    completedBtn.id = "completedbtn";
+    sidePanel.appendChild(completedBtn);
+
+    completedBtn.addEventListener("click", () => {
+        const todoList = document.querySelector("#todo");
+        todoList.innerHTML = "";
+        for (let i = 0; i < completedTasks.length; i++) {
+            const task = document.createElement("div");
+            task.className = "items";
+            task.dataset.id = i;
+            projectTitle.textContent = "Completed Tasks";
+
+            const taskTitle = document.createElement("div");
+            taskTitle.className = "title";
+            taskTitle.textContent = `Title: ${completedTasks[i].title}`;
+            task.appendChild(taskTitle);
+
+            const taskDescription = document.createElement("div");
+            taskDescription.className = "description";
+            taskDescription.textContent = `Description: ${completedTasks[i].description}`;
+            task.appendChild(taskDescription);
+
+            const taskDueDate = document.createElement("div");
+            taskDueDate.className = "duedate";
+            taskDueDate.textContent = `Due Date: ${completedTasks[i].dueDate}`;
+            task.appendChild(taskDueDate);
+
+            todoList.appendChild(task);
+        }
+    });
+
     const projects = document.createElement("div");
     projects.id = "projects";
 
