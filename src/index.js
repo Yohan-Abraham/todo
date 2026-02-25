@@ -23,16 +23,23 @@ function createPage() {
 
     const sidePanel = document.createElement("div");
     sidePanel.id = "side-panel";
-    const sidePanelTitle = document.createElement("h2");
-    sidePanelTitle.textContent = "Projects";
-    sidePanel.appendChild(sidePanelTitle);
 
     const completedBtn = document.createElement("button");
     completedBtn.textContent = "Completed";
     completedBtn.id = "completedbtn";
     sidePanel.appendChild(completedBtn);
 
+    const sidePanelTitle = document.createElement("h2");
+    sidePanelTitle.textContent = "Projects";
+    sidePanel.appendChild(sidePanelTitle);
+
     completedBtn.addEventListener("click", () => {
+
+        if (completedTasks.length === 0) {
+            projectTitle.textContent = "Completed Tasks";
+            return;
+        }
+
         const todoList = document.querySelector("#todo");
         todoList.innerHTML = "";
         for (let i = 0; i < completedTasks.length; i++) {
