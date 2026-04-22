@@ -83,10 +83,16 @@ function createPage() {
     });
 
     projectConfirmBtn.addEventListener("click", (event) => {
-        addProject(newProjectName.value);
-        event.preventDefault();
-        displayProjects();
-        projectModla.close();
+        if (newProjectName.value == "") {
+            return;
+        }
+
+        else {
+            addProject(newProjectName.value);
+            event.preventDefault();
+            displayProjects();
+            projectModla.close();
+        }
     });
 
     const todoList = document.createElement("div");
@@ -101,7 +107,7 @@ function createPage() {
     const priority = document.querySelector("#priority");
 
     const projectsContainer = document.querySelector("#projects");
-    let currentID = 0;
+    let currentID = null;
 
     newTaskBtn.addEventListener("click", () => {
         dialogBox.showModal();
@@ -114,10 +120,20 @@ function createPage() {
             dialogBox.close();
             return;
         }
-        myProjects[currentID].addTask(title.value, description.value, duedate.value, priority.value);
-        event.preventDefault();
-        myProjects[currentID].displayTasks();
-        dialogBox.close();
+        else if (title.value == "") {
+            return;
+        }
+        else if (currentID === null) {
+            alert("Please select a project first!");
+            dialogBox.close();
+            return;
+        }
+        else {
+            myProjects[currentID].addTask(title.value, description.value, duedate.value, priority.value);
+            event.preventDefault();
+            myProjects[currentID].displayTasks();
+            dialogBox.close();
+        }
     });
 
 
