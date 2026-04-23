@@ -135,7 +135,7 @@ function setupEventListeners() {
         dialogBox.showModal();
     });
 
-
+    //checking if project exists and task title is not empty before adding task to project
     confirmBtn.addEventListener("click", (event) => {
         if (myProjects.length === 0) {
             alert("Please create a project first!");
@@ -158,6 +158,7 @@ function setupEventListeners() {
         }
     });
 
+    //add new task to project
     projectsContainer.addEventListener("click", (e) => {
         currentID = e.target.dataset.id;
         projectTitle.textContent = myProjects[e.target.dataset.id].name;
@@ -166,6 +167,7 @@ function setupEventListeners() {
 
 }
 
+//initialize app
 function initializeApp() {
     createPage();
     setupEventListeners();
