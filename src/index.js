@@ -1,9 +1,8 @@
 import "./style.css";
 import { addProject, displayProjects, myProjects, completedTasks } from "./project.js";
 
-function createPage() {
-    const body = document.querySelector("body");
-
+//setup nav bar
+function createNavBar(body) {
     const navBar = document.createElement("nav");
     navBar.id = "nav";
     const projectTitle = document.createElement("h1");
@@ -19,8 +18,10 @@ function createPage() {
 
     navBar.appendChild(newProjectBtn);
     navBar.appendChild(newTaskBtn);
+}
 
-
+//setup side panel
+function createSidePanel(body) {
     const sidePanel = document.createElement("div");
     sidePanel.id = "side-panel";
 
@@ -33,6 +34,32 @@ function createPage() {
     sidePanelTitle.textContent = "Projects";
     sidePanel.appendChild(sidePanelTitle);
 
+    const projects = document.createElement("div");
+    projects.id = "projects";
+
+    sidePanel.appendChild(projects);
+    body.appendChild(sidePanel);
+}
+
+//setup todo list container
+function createTodoListContainer(body) {
+    const todoList = document.createElement("div");
+    todoList.id = "todo";
+    body.appendChild(todoList);
+}
+
+
+function createPage() {
+    const body = document.querySelector("body");
+    createNavBar(body);
+    createSidePanel(body);
+    createTodoListContainer(body);
+}
+
+function setupEventListeners() {
+    //Completed tasks section
+    const completedBtn = document.querySelector("#completedbtn");
+    const projectTitle = document.querySelector("#nav h1");
     completedBtn.addEventListener("click", () => {
 
         if (completedTasks.length === 0) {
@@ -67,18 +94,15 @@ function createPage() {
         }
     });
 
-    const projects = document.createElement("div");
-    projects.id = "projects";
 
-    sidePanel.appendChild(projects);
-    body.appendChild(sidePanel);
-
+    // new project creation
     const projectModla = document.querySelector("#newproject");
     const projectConfirmBtn = document.querySelector("#projectConfirmBtn");
     const newProjectName = document.querySelector("#projectname");
 
 
-    newProjectBtn.addEventListener("click", () => {
+    const createNewProject = document.querySelector("#projectbtn");
+    createNewProject.addEventListener("click", () => {
         projectModla.showModal();
     });
 
@@ -95,10 +119,7 @@ function createPage() {
         }
     });
 
-    const todoList = document.createElement("div");
-    todoList.id = "todo";
-    body.appendChild(todoList);
-
+    // new task creation
     const dialogBox = document.querySelector("#task");
     const confirmBtn = document.querySelector("#confirmBtn");
     const title = document.querySelector("#title");
@@ -109,7 +130,8 @@ function createPage() {
     const projectsContainer = document.querySelector("#projects");
     let currentID = null;
 
-    newTaskBtn.addEventListener("click", () => {
+    const createNewTask = document.querySelector("#newtaskbtn");
+    createNewTask.addEventListener("click", () => {
         dialogBox.showModal();
     });
 
@@ -136,8 +158,6 @@ function createPage() {
         }
     });
 
-
-
     projectsContainer.addEventListener("click", (e) => {
         currentID = e.target.dataset.id;
         projectTitle.textContent = myProjects[e.target.dataset.id].name;
@@ -146,4 +166,9 @@ function createPage() {
 
 }
 
-createPage();
+function initializeApp() {
+    createPage();
+    setupEventListeners();
+}
+
+initializeApp();
