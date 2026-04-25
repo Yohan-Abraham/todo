@@ -17,31 +17,42 @@ class Project {
     displayTasks() {
         const todoList = document.querySelector("#todo");
         todoList.innerHTML = "";
+        this.appendTasks(todoList);
+    }
+
+    priorityLevel(task, i) {
+        if ((this.arr.tasks[i].priority).toLowerCase() === "high") {
+            task.style.borderLeftColor = "red";
+            task.style.borderLeftWidth = "5px";
+        }
+        else if ((this.arr.tasks[i].priority).toLowerCase() === "medium") {
+            task.style.borderLeftColor = "yellow";
+            task.style.borderLeftWidth = "5px";
+        }
+        else if ((this.arr.tasks[i].priority).toLowerCase() === "low") {
+            task.style.borderLeftColor = "green";
+            task.style.borderLeftWidth = "5px";
+        }
+    }
+
+    eventListener(completeBtn, i) {
+        completeBtn.addEventListener("click", () => {
+            completedTasks.push(this.arr.tasks[i]);
+            this.arr.tasks.splice(i, 1);
+            this.displayTasks();
+        });
+    }
+
+    appendTasks(todoList) {
         for (let i = 0; i < this.arr.tasks.length; i++) {
             const task = document.createElement("div");
             task.className = "items";
             task.dataset.id = i;
-            if ((this.arr.tasks[i].priority).toLowerCase() === "high") {
-                task.style.borderLeftColor = "red";
-                task.style.borderLeftWidth = "5px";
-            }
-            else if ((this.arr.tasks[i].priority).toLowerCase() === "medium") {
-                task.style.borderLeftColor = "yellow";
-                task.style.borderLeftWidth = "5px";
-            }
-            else if ((this.arr.tasks[i].priority).toLowerCase() === "low") {
-                task.style.borderLeftColor = "green";
-                task.style.borderLeftWidth = "5px";
-            }
+            this.priorityLevel(task, i);
 
             const completeBtn = document.createElement("button");
             completeBtn.className = "complete";
-
-            completeBtn.addEventListener("click", () => {
-                completedTasks.push(this.arr.tasks[i]);
-                this.arr.tasks.splice(i, 1);
-                this.displayTasks();
-            });
+            this.eventListener(completeBtn, i);
 
             task.appendChild(completeBtn);
 
@@ -61,8 +72,6 @@ class Project {
             task.appendChild(taskDueDate);
 
             todoList.appendChild(task);
-
-
         }
     }
 }
