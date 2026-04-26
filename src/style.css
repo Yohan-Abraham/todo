@@ -136,6 +136,15 @@ h2 {
     grid-row: 1;
 }
 
+.editTask {
+    grid-column: 3;
+    grid-row: 2;
+    justify-self: left;
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
 #task,
 #newproject {
     background-color: black;
