@@ -146,7 +146,8 @@ h2 {
 }
 
 #task,
-#newproject {
+#newproject,
+#newTask {
     background-color: black;
     top: 30%;
     left: 45%;
@@ -171,7 +172,8 @@ form input {
 }
 
 #confirmBtn,
-#projectConfirmBtn {
+#projectConfirmBtn,
+#confirmEdit {
     background-color: black;
     border: 1px solid white;
     border-radius: 10px;
