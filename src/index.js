@@ -136,6 +136,7 @@ function setupEventListeners() {
 
     //checking if project exists and task title is not empty before adding task to project
     confirmBtn.addEventListener("click", (event) => {
+        event.preventDefault();
         const projectTitle = document.querySelector("#nav h1");
         if (myProjects.length === 0) {
             alert("Please create a project first!");
@@ -156,7 +157,6 @@ function setupEventListeners() {
         }
         else {
             myProjects[currentID].addTask(title.value, description.value, duedate.value, priority.value);
-            event.preventDefault();
             myProjects[currentID].displayTasks();
             dialogBox.close();
         }
