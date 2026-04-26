@@ -61,14 +61,13 @@ function setupEventListeners() {
     const completedBtn = document.querySelector("#completedbtn");
     const projectTitle = document.querySelector("#nav h1");
     completedBtn.addEventListener("click", () => {
-
+        const todoList = document.querySelector("#todo");
+        todoList.innerHTML = "";
         if (completedTasks.length === 0) {
             projectTitle.textContent = "Completed Tasks";
             return;
         }
 
-        const todoList = document.querySelector("#todo");
-        todoList.innerHTML = "";
         for (let i = 0; i < completedTasks.length; i++) {
             const task = document.createElement("div");
             task.className = "items";
