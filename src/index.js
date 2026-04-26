@@ -106,13 +106,13 @@ function setupEventListeners() {
     });
 
     projectConfirmBtn.addEventListener("click", (event) => {
+        event.preventDefault();
         if (newProjectName.value == "") {
             return;
         }
 
         else {
             addProject(newProjectName.value);
-            event.preventDefault();
             displayProjects();
             projectModla.close();
         }
@@ -164,9 +164,13 @@ function setupEventListeners() {
 
     //add new task to project
     projectsContainer.addEventListener("click", (e) => {
+        e.preventDefault();
         currentID = e.target.dataset.id;
-        projectTitle.textContent = myProjects[e.target.dataset.id].name;
-        myProjects[e.target.dataset.id].displayTasks();
+        if (currentID == undefined) {
+            return;
+        }
+        projectTitle.textContent = myProjects[currentID].name;
+        myProjects[currentID].displayTasks();
     });
 
 }
