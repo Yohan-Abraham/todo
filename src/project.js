@@ -43,6 +43,38 @@ class Project {
         });
     }
 
+    //updates task values
+    updateTaskValues(i, title, description, duedate, priority) {
+        this.arr.tasks[i].title = title;
+        this.arr.tasks[i].description = description;
+        this.arr.tasks[i].dueDate = duedate;
+        this.arr.tasks[i].priority = priority;
+    }
+
+    editTaskListener(editTask, i) {
+        const newTask = document.querySelector("#newTask");
+        editTask.addEventListener("click", () => {
+            //form values
+            const title = document.querySelector("#newTitle");
+            const description = document.querySelector("#newDescription");
+            const duedate = document.querySelector("#newDuedate");
+            const priority = document.querySelector("#newPriority");
+            newTask.showModal();
+
+            //updating task values using form
+            const confirmEditBtn = document.querySelector("#confirmEdit");
+            confirmEditBtn.onclick = (event) => {
+                event.preventDefault();
+                console.log(this.arr.tasks[i]);
+                this.updateTaskValues(i, title.value, description.value, duedate.value, priority.value);
+                console.log(this.arr.tasks[i].title);
+                this.displayTasks();
+                newTask.close();
+            };
+        });
+
+    }
+
     appendTasks(todoList) {
         for (let i = 0; i < this.arr.tasks.length; i++) {
             const task = document.createElement("div");
@@ -53,7 +85,6 @@ class Project {
             const completeBtn = document.createElement("button");
             completeBtn.className = "complete";
             this.eventListener(completeBtn, i);
-
             task.appendChild(completeBtn);
 
             const taskTitle = document.createElement("div");
@@ -70,6 +101,13 @@ class Project {
             taskDueDate.className = "duedate";
             taskDueDate.textContent = `Due Date: ${this.arr.tasks[i].dueDate}`;
             task.appendChild(taskDueDate);
+
+            const editTask = document.createElement("button");
+            editTask.className = "editTask";
+            editTask.textContent = `Edit Task`;
+            task.appendChild(editTask);
+            this.editTaskListener(editTask, i);
+
 
             todoList.appendChild(task);
         }
