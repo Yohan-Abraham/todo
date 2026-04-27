@@ -81,6 +81,51 @@ class Project {
         });
     }
 
+    expandTaskListener(expandTask, i) {
+        expandTask.addEventListener("click", () => {
+            const taskCanvas = document.createElement("div");
+            taskCanvas.className = "taskCanvas";
+            const body = document.querySelector("body");
+            body.appendChild(taskCanvas);
+
+            const closeView = document.createElement("button");
+            closeView.className = "closeBtn";
+            closeView.textContent = "X";
+            taskCanvas.appendChild(closeView);
+            closeView.addEventListener("click", () => {
+                body.removeChild(taskCanvas);
+            });
+
+            const taskTitle = document.createElement("div");
+            taskTitle.className = "expandTitle";
+            taskTitle.textContent = `${this.arr.tasks[i].title}`;
+            taskCanvas.appendChild(taskTitle);
+
+            const taskDescription = document.createElement("div");
+            taskDescription.className = "expandDescription";
+            taskDescription.textContent = `Description: ${this.arr.tasks[i].description}`;
+            taskCanvas.appendChild(taskDescription);
+
+            const taskDueDate = document.createElement("div");
+            taskDueDate.className = "expandDueDate";
+            taskDueDate.textContent = `Due: ${this.arr.tasks[i].dueDate}`;
+            taskCanvas.appendChild(taskDueDate);
+
+            const editTask = document.createElement("button");
+            editTask.className = "expandEdit";
+            editTask.textContent = `Edit Task`;
+            taskCanvas.appendChild(editTask);
+            this.editTaskListener(editTask, i);
+
+            const removeTask = document.createElement("button");
+            removeTask.className = "expandRemove";
+            removeTask.textContent = `Remove Task`;
+            taskCanvas.appendChild(removeTask);
+            this.removeTaskListener(removeTask, i);
+
+        });
+    }
+
     appendTasks(todoList) {
         for (let i = 0; i < this.arr.tasks.length; i++) {
             const task = document.createElement("div");
@@ -95,17 +140,17 @@ class Project {
 
             const taskTitle = document.createElement("div");
             taskTitle.className = "title";
-            taskTitle.textContent = `Title: ${this.arr.tasks[i].title}`;
+            taskTitle.textContent = `${this.arr.tasks[i].title}`;
             task.appendChild(taskTitle);
 
             const taskDescription = document.createElement("div");
             taskDescription.className = "description";
             taskDescription.textContent = `Description: ${this.arr.tasks[i].description}`;
-            task.appendChild(taskDescription);
+
 
             const taskDueDate = document.createElement("div");
             taskDueDate.className = "duedate";
-            taskDueDate.textContent = `Due Date: ${this.arr.tasks[i].dueDate}`;
+            taskDueDate.textContent = `Due: ${this.arr.tasks[i].dueDate}`;
             task.appendChild(taskDueDate);
 
             const editTask = document.createElement("button");
@@ -120,6 +165,11 @@ class Project {
             task.appendChild(removeTask);
             this.removeTaskListener(removeTask, i);
 
+            const expandTask = document.createElement("button");
+            expandTask.className = "expandTask";
+            expandTask.textContent = ">";
+            task.appendChild(expandTask);
+            this.expandTaskListener(expandTask, i);
 
             todoList.appendChild(task);
         }
