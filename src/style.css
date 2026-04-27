@@ -175,16 +175,43 @@ h2 {
     width: 80vw;
     background-color: rgb(10, 10, 10);
     border: 1px solid white;
-    position: absolute;
+    position: fixed;
     top: 120px;
     right: 150px;
     z-index: 1;
+    display: grid;
     grid-template-columns: 3fr 1fr;
     grid-template-rows: 1fr 1fr 2fr 1fr;
     padding: 1em;
+    align-items: center;
+    justify-items: left;
+}
+
+.expandDueDate {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+.expandDescription {
+    grid-row: 3;
+    grid-column: 1;
+}
+
+.expandEdit {
+    grid-row: 4;
+    grid-column: 1;
+}
+
+.expandRemove {
+    grid-row: 4;
+    grid-column: 2;
 }
 
 .closeBtn {
+    justify-self: right;
+    align-self: first baseline;
+    grid-column: 2;
+    grid-row: 1;
     background-color: black;
     border-radius: 10px;
 }
@@ -217,7 +244,9 @@ form input {
 
 #confirmBtn,
 #projectConfirmBtn,
-#confirmEdit {
+#confirmEdit,
+.expandEdit,
+.expandRemove {
     background-color: black;
     border: 1px solid white;
     border-radius: 10px;
