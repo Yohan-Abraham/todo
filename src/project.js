@@ -65,14 +65,20 @@ class Project {
             const confirmEditBtn = document.querySelector("#confirmEdit");
             confirmEditBtn.onclick = (event) => {
                 event.preventDefault();
-                console.log(this.arr.tasks[i]);
                 this.updateTaskValues(i, title.value, description.value, duedate.value, priority.value);
-                console.log(this.arr.tasks[i].title);
                 this.displayTasks();
                 newTask.close();
             };
         });
 
+    }
+
+    removeTaskListener(removeTask, i) {
+        removeTask.addEventListener("click", (event) => {
+            event.preventDefault();
+            this.arr.tasks.splice(i, 1);
+            this.displayTasks();
+        });
     }
 
     appendTasks(todoList) {
@@ -107,6 +113,12 @@ class Project {
             editTask.textContent = `Edit Task`;
             task.appendChild(editTask);
             this.editTaskListener(editTask, i);
+
+            const removeTask = document.createElement("button");
+            removeTask.className = "removeTask";
+            removeTask.textContent = `Remove Task`;
+            task.appendChild(removeTask);
+            this.removeTaskListener(removeTask, i);
 
 
             todoList.appendChild(task);
