@@ -3,6 +3,7 @@ import { Task, TaskList } from "./list.js";
 const myProjects = [];
 const completedTasks = [];
 
+//Tasks inside project
 class Project {
     constructor(name) {
         this.name = name;
@@ -12,6 +13,7 @@ class Project {
     addTask(title, description, dueDate, priority) {
         const task = new Task(title, description, dueDate, priority);
         this.arr.tasks.push(task);
+        localStorage.setItem("projects", JSON.stringify(myProjects));
     }
 
     displayTasks() {
@@ -35,11 +37,18 @@ class Project {
         }
     }
 
+    updateLocalStorage() {
+        localStorage.removeItem("projects");
+        localStorage.setItem("projects", JSON.stringify(myProjects));
+    }
+
     eventListener(completeBtn, i) {
         completeBtn.addEventListener("click", () => {
             completedTasks.push(this.arr.tasks[i]);
             this.arr.tasks.splice(i, 1);
             this.displayTasks();
+            this.updateLocalStorage();
+            localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
         });
     }
 
@@ -49,6 +58,7 @@ class Project {
         this.arr.tasks[i].description = description;
         this.arr.tasks[i].dueDate = duedate;
         this.arr.tasks[i].priority = priority;
+        this.updateLocalStorage();
     }
 
     editTaskListener(editTask, i) {
@@ -78,6 +88,7 @@ class Project {
             event.preventDefault();
             this.arr.tasks.splice(i, 1);
             this.displayTasks();
+            this.updateLocalStorage();
         });
     }
 
@@ -98,7 +109,7 @@ class Project {
 
             const taskTitle = document.createElement("div");
             taskTitle.className = "expandTitle";
-            taskTitle.textContent = `${this.arr.tasks[i].title}`;
+            taskTitle.textContent = `Title: ${this.arr.tasks[i].title}`;
             taskCanvas.appendChild(taskTitle);
 
             const taskDescription = document.createElement("div");
@@ -180,6 +191,7 @@ class Project {
 function addProject(name) {
     const project = new Project(name);
     myProjects.push(project);
+    localStorage.setItem("projects", JSON.stringify(myProjects));
 }
 
 function displayProjects() {
@@ -194,4 +206,23 @@ function displayProjects() {
     }
 }
 
-export { addProject, displayProjects, myProjects, completedTasks };
+function loadLocalStorage() {
+    const projects = JSON.parse(localStorage.getItem("projects"));
+    for (let i = 0; i < projects.length; i++) {
+        addProject(projects[i].name);
+        for (let j = 0; j < projects[i].arr.tasks.length; j++) {
+            const task = new Task(projects[i].arr.tasks[j].title, projects[i].arr.tasks[j].description, projects[i].arr.tasks[j].dueDate, projects[i].arr.tasks[j].priority);
+            myProjects[i].arr.tasks.push(task);
+        }
+    }
+
+    if (JSON.parse(localStorage.getItem("completedTasks")) != null) {
+        const completed = JSON.parse(localStorage.getItem("completedTasks"));
+        for (let i = 0; i < completed.length; i++) {
+            const task = new Task(completed[i].title, completed[i].description, completed[i].dueDate, completed[i].priority);
+            completedTasks.push(task);
+        }
+    }
+}
+
+export { addProject, displayProjects, myProjects, completedTasks, loadLocalStorage };
