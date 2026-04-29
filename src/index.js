@@ -1,5 +1,5 @@
 import "./style.css";
-import { addProject, displayProjects, myProjects, completedTasks } from "./project.js";
+import { addProject, displayProjects, myProjects, completedTasks, loadLocalStorage } from "./project.js";
 
 //setup nav bar
 function createNavBar(body) {
@@ -179,6 +179,10 @@ function setupEventListeners() {
 function initializeApp() {
     createPage();
     setupEventListeners();
+    if (localStorage.getItem("projects") != null) {
+        loadLocalStorage();
+        displayProjects();
+    }
 }
 
 initializeApp();
