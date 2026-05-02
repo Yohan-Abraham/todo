@@ -127,7 +127,7 @@ function setupEventListeners() {
     const priority = document.querySelector("#priority");
 
     const projectsContainer = document.querySelector("#projects");
-    let currentID = null;
+    let currentID = myProjects.length - 1;
 
     const createNewTask = document.querySelector("#newtaskbtn");
     createNewTask.addEventListener("click", () => {
@@ -179,10 +179,9 @@ function setupEventListeners() {
 function initializeApp() {
     createPage();
     setupEventListeners();
-    if (localStorage.getItem("projects") != null) {
-        loadLocalStorage();
-        displayProjects();
-    }
+
+    loadLocalStorage();
+    displayProjects();
 }
 
 initializeApp();

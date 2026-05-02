@@ -13,7 +13,7 @@ class Project {
     addTask(title, description, dueDate, priority) {
         const task = new Task(title, description, dueDate, priority);
         this.arr.tasks.push(task);
-        localStorage.setItem("projects", JSON.stringify(myProjects));
+        this.updateLocalStorage();
     }
 
     displayTasks() {
@@ -38,7 +38,6 @@ class Project {
     }
 
     updateLocalStorage() {
-        localStorage.removeItem("projects");
         localStorage.setItem("projects", JSON.stringify(myProjects));
     }
 
@@ -208,12 +207,24 @@ function displayProjects() {
 
 function loadLocalStorage() {
     const projects = JSON.parse(localStorage.getItem("projects"));
+    const data = localStorage.getItem("projects")
+    if (!data || JSON.parse(data).length == 0) {
+        addProject("Deafult");
+        return;
+    }
+
     for (let i = 0; i < projects.length; i++) {
-        addProject(projects[i].name);
+        const project = new Project(projects[i].name);
+
         for (let j = 0; j < projects[i].arr.tasks.length; j++) {
-            const task = new Task(projects[i].arr.tasks[j].title, projects[i].arr.tasks[j].description, projects[i].arr.tasks[j].dueDate, projects[i].arr.tasks[j].priority);
-            myProjects[i].arr.tasks.push(task);
+            const t = projects[i].arr.tasks[j];
+            project.arr.tasks.push(
+                new Task(t.title, t.description, t.dueDate, t.priority)
+            );
         }
+
+        myProjects.push(project);
+
     }
 
     if (JSON.parse(localStorage.getItem("completedTasks")) != null) {
